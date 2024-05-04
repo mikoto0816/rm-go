@@ -9,7 +9,9 @@ import (
 func Router() {
 	//返回json或静态资源
 	http.HandleFunc("/", views.HTML.Index)
-	http.HandleFunc("/api/post", api.API.Post)
+	http.HandleFunc("/c/", views.HTML.Category)
+	http.HandleFunc("/login", views.HTML.Login)
+	http.HandleFunc("/api/v1/post", api.API.SaveAndUpdatePost)
 
 	//静态资源映射
 	http.Handle("/resource/", http.StripPrefix("/resource/",
