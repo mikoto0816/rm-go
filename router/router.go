@@ -7,6 +7,16 @@ import (
 )
 
 func Router() {
+	//http.Handle("/", context.Context)
+	//context.Context.Handler("/c/{id}", views.HTML.CategoryNew)
+	//context.Context.Handler("/login", views.HTML.LoginNew)
+	//context.Context.Handler("/p/", views.HTML.DetailNew)
+	//context.Context.Handler("/writing/", views.HTML.WritingNew)
+	//context.Context.Handler("/pigeonhole/", views.HTML.PigeonholeNew)
+	//context.Context.Handler("/api/v1/post", api.API.SaveAndUpdatePostNew)
+	//context.Context.Handler("/api/v1/post/", api.API.GetPostNew)
+	//context.Context.Handler("/api/v1/post/search", api.API.SearchPostNew)
+	//context.Context.Handler("/api/v1/login", api.API.LoginNew)
 	//返回json或静态资源
 	http.HandleFunc("/", views.HTML.Index)
 	http.HandleFunc("/c/", views.HTML.Category)
