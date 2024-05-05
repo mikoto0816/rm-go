@@ -7,13 +7,21 @@ import (
 	models "rm-go-blog/modles"
 )
 
-func GetAllHomeInfo(page, pageSize int) (*models.HomeResponse, error) {
+func GetAllHomeInfo(slug string, page, pageSize int) (*models.HomeResponse, error) {
 	categorys, err := dao.GetAllCategory()
 	//分页
 	if err != nil {
 		return nil, err
 	}
-	posts, err := dao.GetPostPage(page, pageSize)
+	var total int
+	var posts []models.Post
+	if slug == "" {
+		posts, err = dao.GetPostPage(page, pageSize)
+		total = dao.CountGetAllPostCount()
+	} else {
+		posts, err = dao.GetPostPageBySlug(slug, page, pageSize)
+		total = dao.CountGetAllPostCountBySlug(slug)
+	}
 	var postsMores []models.PostMore
 	for _, post := range posts {
 		//查询categoryName
@@ -40,7 +48,7 @@ func GetAllHomeInfo(page, pageSize int) (*models.HomeResponse, error) {
 		}
 		postsMores = append(postsMores, postsMore)
 	}
-	total := dao.CountGetAllPost()
+
 	pagesCount := (total-1)/10 + 1
 	var pages []int
 	for i := 0; i < pagesCount; i++ {

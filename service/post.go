@@ -48,3 +48,11 @@ func Writing() (wr models.WritingResp) {
 	wr.Categorys = category
 	return
 }
+
+func SavePost(post *models.Post) {
+	dao.SavePost(post)
+}
+
+func UpdatePost(post *models.Post) {
+	dao.UpdatePost(post)
+}

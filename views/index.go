@@ -7,6 +7,7 @@ import (
 	"rm-go-blog/common"
 	"rm-go-blog/service"
 	"strconv"
+	"strings"
 )
 
 func (*HTMLApi) Index(w http.ResponseWriter, r *http.Request) {
@@ -23,7 +24,10 @@ func (*HTMLApi) Index(w http.ResponseWriter, r *http.Request) {
 		page, _ = strconv.Atoi(pageStr)
 	}
 	pageSize := 10
-	hr, err := service.GetAllHomeInfo(page, pageSize)
+	path := r.URL.Path
+	slug := strings.TrimPrefix(path, "/")
+
+	hr, err := service.GetAllHomeInfo(slug, page, pageSize)
 	if err != nil {
 		log.Println("首页获取数据出错：", err)
 		index.WriteError(w, errors.New("系统错误，请联系管理员"))
