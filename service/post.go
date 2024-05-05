@@ -2,6 +2,7 @@ package service
 
 import (
 	"html/template"
+	"log"
 	"rm-go-blog/config"
 	"rm-go-blog/dao"
 	models "rm-go-blog/modles"
@@ -34,4 +35,16 @@ func GetPostDetail(pId int) (*models.PostDetail, error) {
 		postMore,
 	}
 	return postDetail, nil
+}
+
+func Writing() (wr models.WritingResp) {
+	wr.Title = config.Cfg.Viewer.Title
+	wr.CdnURL = config.Cfg.System.CdnURL
+	category, err := dao.GetAllCategory()
+	if err != nil {
+		log.Println(err)
+		return
+	}
+	wr.Categorys = category
+	return
 }
