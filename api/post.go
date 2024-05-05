@@ -99,3 +99,10 @@ func (*Api) GetPost(w http.ResponseWriter, r *http.Request) {
 	}
 	common.Success(w, post)
 }
+func (*Api) SearchPost(w http.ResponseWriter, r *http.Request) {
+
+	_ = r.ParseForm()
+	condition := r.Form.Get("val")
+	searchReap := service.SearchPost(condition)
+	common.Success(w, searchReap)
+}
