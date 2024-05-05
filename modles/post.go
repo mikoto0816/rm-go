@@ -56,3 +56,9 @@ type PostRes struct {
 	config.SystemConfig
 	Article PostMore
 }
+
+type PostDetail struct {
+	config.Viewer
+	config.SystemConfig
+	Article PostMore
+}
